@@ -1,0 +1,54 @@
+nsd:nsd-catalog:
+    nsd:
+    -   id: shieldtest_nsd
+        name: shieldtest_nsd
+        short-name: shieldtest_nsd
+        description: Network Service descriptor of the test vNSF
+        vendor: i2CAT
+        version: '1.0'
+
+        logo: shield.png
+
+        constituent-vnfd:
+        -   member-vnf-index: 1
+            vnfd-id-ref: shieldtest1_vnfd
+        -   member-vnf-index: 2
+            vnfd-id-ref: shieldtest2_vnfd
+
+#        initial-config-primitive:
+#        -   name: start traffic
+#            parameter:
+#            -   name: port
+#                value: 5555
+#            -   name: ssh-username
+#                value: fedora
+#            -   name: ssh-password
+#                value: fedora
+#            seq: '1'
+#            user-defined-script: start_traffic.py
+
+        vld:
+            -   id: shieldtest_nsd_vld1
+                name: shieldtest_nsd_vld1
+                short-name: shieldtest_nsd_vld1
+                mgmt-network: 'true'
+                type: ELAN
+                vim-network-name: 'provider'
+                vnfd-connection-point-ref:
+                -   nsd:member-vnf-index-ref: 1
+                    nsd:vnfd-id-ref: shieldtest1_vnfd
+                    nsd:vnfd-connection-point-ref: shieldtest1_vnfd/cp0
+                -   nsd:member-vnf-index-ref: 2
+                    nsd:vnfd-id-ref: shieldtest2_vnf
+                    nsd:vnfd-connection-point-ref: shieldtest2_vnfd/cp0
+            -   id: shieldtest_nsd_vld2
+                name: shieldtest_nsd_vld2
+                short-name: shieldtest_nsd_vld2
+                type: ELAN
+                vnfd-connection-point-ref:
+                -   nsd:member-vnf-index-ref: 1
+                    nsd:vnfd-id-ref: shieldtest1_vnfd
+                    nsd:vnfd-connection-point-ref: shieldtest1_vnfd/cp1
+                -   nsd:member-vnf-index-ref: 2
+                    nsd:vnfd-id-ref: shieldtest2_vnfd
+                    nsd:vnfd-connection-point-ref: shieldtest2_vnfd/cp1
